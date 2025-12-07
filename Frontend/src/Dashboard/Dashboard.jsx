@@ -796,16 +796,6 @@ const Dashboard = () => {
                   <h2>All Reports</h2>
                 </div>
 
-                <div className="search-container">
-                  <Search size={20} />
-                  <input
-                    type="text"
-                    name={searchName}
-                    onChange={handleInputChange}
-                    placeholder="Search reports, cases, or documents..."
-                    className="search-input"
-                  />
-                </div>
                 <div className="reports-grid-full">
                   {searchName
                     ? searchReport.map((report) => (

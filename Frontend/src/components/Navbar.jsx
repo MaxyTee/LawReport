@@ -107,7 +107,7 @@ const Navbar = () => {
               <Link to="/login">Login</Link>
             </button>
             <button className="mobile-signup-btn">
-              <Link to="/login">Login</Link>
+              <Link to="/login">Subscribe>/Link>
             </button>
           </div>
         </div>

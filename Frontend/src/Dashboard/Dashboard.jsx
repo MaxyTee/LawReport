@@ -346,28 +346,24 @@ const Dashboard = () => {
           icon: FileText,
           number: reports?.length || "0",
           label: "Total Reports",
-          trend: "+2 this week",
           color: blueColors.primary,
         },
         {
           icon: BarChart3,
           number: reports?.filter((r) => r.status === "draft").length || "0",
           label: "Drafts",
-          trend: "+1 today",
           color: blueColors.accent,
         },
         {
           icon: Download,
           number: "156",
           label: "Downloads",
-          trend: "+24%",
           color: blueColors.secondary,
         },
         {
           icon: Eye,
           number: totalView || totalPublishView || 0,
           label: "Views",
-          trend: "+12%",
           color: blueColors.light,
         },
       ];

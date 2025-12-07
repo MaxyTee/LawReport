@@ -1,5 +1,5 @@
 // components/VerificationEmail.jsx
-import React from "react";
+
 import dotenv from "dotenv";
 
 dotenv.config();

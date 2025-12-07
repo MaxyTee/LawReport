@@ -53,14 +53,14 @@ const RedirectAuthenticatedUser = ({ children }) => {
 };
 
 function App() {
-  const { isCheckingAuth, checkAuth } = useAuthStore();
-  const { user } = useAuthStore();
+  // const { isCheckingAuth, checkAuth } = useAuthStore();
+  // const { user } = useAuthStore();
 
-  useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+  // useEffect(() => {
+  //   checkAuth();
+  // }, [checkAuth]);
 
-  if (isCheckingAuth) return <LoadingSpinner />;
+  // if (isCheckingAuth) return <LoadingSpinner />;
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -93,11 +93,7 @@ function App() {
               <Dashboard />
             </ProtectedRoute>
           }
-        >
-          <Route path="profilePage" element={<ProfilePage user={user} />} />
-          <Route path="settings" element={<SettingsPage />} />
-          <Route path="supportPage" element={<HelpSupportPage />} />
-        </Route>
+        />
 
         <Route path="/verify-email" element={<EmailVerificationPage />} />
         <Route

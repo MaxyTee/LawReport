@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { Loader2 } from "lucide-react";
+import { Loader, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import toast from "react-hot-toast";
@@ -201,7 +201,7 @@ const Login = () => {
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="spinner" size={14} />
+                    <Loader className="spin" />
                     <span>
                       {isLogin ? "Signing in..." : "Creating account..."}
                     </span>

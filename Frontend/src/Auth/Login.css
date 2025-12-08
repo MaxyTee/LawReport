@@ -358,7 +358,7 @@
   width: 100%;
 }
 
-.spinner {
+.spin {
   animation: spin 1s linear infinite;
 }
 

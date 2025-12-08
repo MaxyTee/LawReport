@@ -104,10 +104,14 @@ const Navbar = () => {
 
           <div className="mobile-auth">
             <button className="mobile-login-btn">
-              <Link to="/login">Login</Link>
+              <Link to="/login" className="mobile-login-btn-link">
+                Login
+              </Link>
             </button>
             <button className="mobile-signup-btn">
-              <Link to="/login">Subscribe>/Link>
+              <Link to="" className="mobile-signup-btn-link">
+                Subscribe
+              </Link>
             </button>
           </div>
         </div>

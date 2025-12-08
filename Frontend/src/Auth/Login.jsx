@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { Loader } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
+import toast from "react-hot-toast";
+
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
@@ -26,28 +28,35 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const name = `${formData.firstName} ${formData.lastName}`;
-
     if (!isLogin) {
+      // Validate passwords match for signup
+      if (formData.password !== formData.confirmPassword) {
+        toast.error("Passwords do not match");
+        return;
+      }
+
+      const name = `${formData.firstName} ${formData.lastName}`;
+
       try {
         await signup(formData.email, formData.password, name);
+        toast.success(
+          "Account created successfully! Please verify your email."
+        );
         navigate("/verify-email");
       } catch (error) {
         console.log(error);
+        toast.error("Signup failed. Please try again.");
       }
     } else {
       try {
         await login(formData.email, formData.password);
+        toast.success("Logged in successfully!");
         navigate("/dashboard");
       } catch (error) {
         console.log(error);
+        toast.error("Login failed. Please check your credentials.");
       }
     }
-
-    console.log("Login successful! Welcome to BUKLawReport");
-    // Then you'd normally redirect to dashboard
-
-    // navigate("/dashboard");
   };
 
   const toggleMode = () => {
@@ -63,7 +72,6 @@ const Login = () => {
 
   return (
     <div className="login-page">
-      {/* Background Image */}
       <div
         className="login-background"
         style={{
@@ -71,7 +79,6 @@ const Login = () => {
         }}
       >
         <div className="login-container">
-          {/* Login Card */}
           <div className="login-card">
             {/* Header */}
             <div className="login-header">
@@ -119,7 +126,7 @@ const Login = () => {
                   </div>
                 </div>
               )}
-              {/* {error && <p>{error}</p>} */}
+
               <div className="form-group">
                 <label htmlFor="email">Email Address</label>
                 <input
@@ -132,6 +139,7 @@ const Login = () => {
                   required
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input
@@ -144,6 +152,7 @@ const Login = () => {
                   required
                 />
               </div>
+
               {!isLogin && (
                 <div className="form-group">
                   <label htmlFor="confirmPassword">Confirm Password</label>
@@ -158,8 +167,19 @@ const Login = () => {
                   />
                 </div>
               )}
-              {LoginError && <p className="error">{LoginError}</p>}
-              {SignupError && <p className="error">{SignupError}</p>}
+
+              {/* Fixed error display */}
+              {isLogin && LoginError && (
+                <div className="error-message">
+                  <p className="error">{LoginError}</p>
+                </div>
+              )}
+
+              {!isLogin && SignupError && (
+                <div className="error-message">
+                  <p className="error">{SignupError}</p>
+                </div>
+              )}
 
               {isLogin && (
                 <div className="form-options">
@@ -173,14 +193,22 @@ const Login = () => {
                   </a>
                 </div>
               )}
+
               <button
                 type="submit"
                 className="login-button"
                 disabled={isLoading}
               >
-                {isLogin
-                  ? `${isLoading ? <Loader size={24} /> : "Sign In"}`
-                  : `${isLoading ? <Loader size={24} /> : "Create Account"}`}
+                {isLoading ? (
+                  <>
+                    <Loader2 className="spinner" size={14} />
+                    <span>
+                      {isLogin ? "Signing in..." : "Creating account..."}
+                    </span>
+                  </>
+                ) : (
+                  <span>{isLogin ? "Sign In" : "Create Account"}</span>
+                )}
               </button>
             </form>
 
@@ -194,6 +222,7 @@ const Login = () => {
                   type="button"
                   className="switch-button"
                   onClick={toggleMode}
+                  disabled={isLoading}
                 >
                   {isLogin ? "Sign up" : "Sign in"}
                 </button>

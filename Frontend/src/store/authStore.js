@@ -8,8 +8,8 @@ axios.defaults.withCredentials = true;
 export const useAuthStore = create((set) => ({
   user: null,
   isAuthenticated: false,
-  SignupError: null,
-  LoginError: null,
+  SignupError: "",
+  LoginError: "",
   isLoading: false,
   isCheckingAuth: true,
 
@@ -24,10 +24,11 @@ export const useAuthStore = create((set) => ({
       set({ user: response.data, isAuthenticated: true, isLoading: false });
     } catch (error) {
       set({
-        SignupError: error.response.data.message || "Error signing up",
+        SignupError: error?.response?.data?.message || "Error signing up",
         isLoading: false,
       });
       console.log(error);
+      console.log(error?.response?.data?.message);
       throw error;
     }
   },
@@ -46,10 +47,14 @@ export const useAuthStore = create((set) => ({
         isLoading: false,
       });
     } catch (error) {
+      console.log(error?.response?.data?.message);
       set({
-        LoginError: error.response?.data?.message || "Error logining in",
+        LoginError: error?.response?.data?.message || "Error logining in",
         isLoading: false,
       });
+      return {
+        errorMsg: error?.response?.data?.message,
+      };
     }
   },
 

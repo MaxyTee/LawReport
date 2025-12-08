@@ -346,24 +346,28 @@ const Dashboard = () => {
           icon: FileText,
           number: reports?.length || "0",
           label: "Total Reports",
+          trend: "+2 this week",
           color: blueColors.primary,
         },
         {
           icon: BarChart3,
           number: reports?.filter((r) => r.status === "draft").length || "0",
           label: "Drafts",
+          trend: "+1 today",
           color: blueColors.accent,
         },
         {
           icon: Download,
           number: "156",
           label: "Downloads",
+          trend: "+24%",
           color: blueColors.secondary,
         },
         {
           icon: Eye,
           number: totalView || totalPublishView || 0,
           label: "Views",
+          trend: "+12%",
           color: blueColors.light,
         },
       ];
@@ -796,6 +800,16 @@ const Dashboard = () => {
                   <h2>All Reports</h2>
                 </div>
 
+                <div className="search-container">
+                  <Search size={20} />
+                  <input
+                    type="text"
+                    name={searchName}
+                    onChange={handleInputChange}
+                    placeholder="Search reports, cases, or documents..."
+                    className="search-input"
+                  />
+                </div>
                 <div className="reports-grid-full">
                   {searchName
                     ? searchReport.map((report) => (

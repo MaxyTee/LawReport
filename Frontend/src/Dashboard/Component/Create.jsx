@@ -51,6 +51,7 @@ const Create = (reportToEdit) => {
   };
 
   const handleSaveDraft = async () => {
+    setDraftLoading(true);
     if (
       reportToEdit.title ||
       reportToEdit.summary ||
@@ -62,10 +63,21 @@ const Create = (reportToEdit) => {
         ...report,
         draftId: reportToEdit._id,
       };
-      return await updateDraft(editPayload);
+      await updateDraft(editPayload);
+      setDraftLoading(false);
+      toast.success("Draft Updated Successfully");
+
+      setReport({
+        title: "",
+        summary: "",
+        tags: "",
+        content: "",
+        status: "draft",
+        userId: user._id,
+      });
+      return;
     }
 
-    setDraftLoading(true);
     try {
       await createReport({ ...report, status: "draft" });
       setDraftLoading(false);
@@ -83,6 +95,10 @@ const Create = (reportToEdit) => {
       status: "draft",
       userId: user._id,
     });
+  };
+
+  const handlePreview = () => {
+    console.log("Clicked");
   };
   return (
     <div className="create-tab">
@@ -161,7 +177,11 @@ const Create = (reportToEdit) => {
               )}
               Create Report
             </button>
-            <button type="button" className="btn btn-secondary">
+            <button
+              type="button"
+              onClick={handlePreview}
+              className="btn btn-secondary"
+            >
               <Eye size={18} />
               Preview
             </button>

@@ -50,7 +50,9 @@ const Login = () => {
     } else {
       try {
         await login(formData.email, formData.password);
-        toast.success("Logged in successfully!");
+        if (!LoginError) {
+          toast.success("Logged in successfully!");
+        }
         navigate("/dashboard");
       } catch (error) {
         console.log(error);

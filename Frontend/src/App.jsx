@@ -1,5 +1,5 @@
 // App.js
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -53,14 +53,14 @@ const RedirectAuthenticatedUser = ({ children }) => {
 };
 
 function App() {
-  // const { isCheckingAuth, checkAuth } = useAuthStore();
-  // const { user } = useAuthStore();
+  const { isCheckingAuth, checkAuth } = useAuthStore();
+  const { user } = useAuthStore();
 
-  // useEffect(() => {
-  //   checkAuth();
-  // }, [checkAuth]);
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
 
-  // if (isCheckingAuth) return <LoadingSpinner />;
+  if (isCheckingAuth) return <LoadingSpinner />;
 
   const router = createBrowserRouter(
     createRoutesFromElements(

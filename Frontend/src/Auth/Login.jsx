@@ -18,6 +18,8 @@ const Login = () => {
   const navigate = useNavigate();
   const { login, signup, SignupError, LoginError, isLoading } = useAuthStore();
 
+  console.log(LoginError);
+
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -40,7 +42,7 @@ const Login = () => {
       try {
         await signup(formData.email, formData.password, name);
         toast.success(
-          "Account created successfully! Please verify your email."
+          "Account created successfully! Please verify your email.",
         );
         navigate("/verify-email");
       } catch (error) {
@@ -50,6 +52,7 @@ const Login = () => {
     } else {
       try {
         await login(formData.email, formData.password);
+        console.log("Number 55", LoginError);
         if (!LoginError) {
           toast.success("Logged in successfully!");
         }

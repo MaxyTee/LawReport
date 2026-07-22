@@ -34,6 +34,8 @@ import {
   Settings,
   HelpCircle,
   Loader,
+  MessageSquare,
+  SquarePen,
 } from "lucide-react";
 import Create from "./Component/Create";
 import ReportPreviewModal from "./Component/ReportPreViewModal";
@@ -42,6 +44,7 @@ import { formatDate } from "../utils/formatDate";
 import { ProfilePage } from "./Component/ProfilePage";
 import { SettingsPage } from "./Component/SettingPage";
 import { HelpSupportPage } from "./Component/HelpSupportPage";
+import FeedbackModal from "./Component/FeedbackModal";
 
 const ReportCard = ({
   title,
@@ -56,6 +59,7 @@ const ReportCard = ({
   theme,
   deleting,
   publish,
+  onFeedback,
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -81,9 +85,13 @@ const ReportCard = ({
             {status}
           </div>
           <div className="card-actions">
+            <button className="cardiactions" onClick={onFeedback}>
+              <SquarePen size={16} />
+            </button>
             <button className="icon-btn" onClick={onPreview}>
               <Eye size={16} />
             </button>
+            
             {userRole === "admin" && (
               <button className="icon-btn" onClick={onEdit}>
                 <Edit3 size={16} />
@@ -192,6 +200,7 @@ const QuickAction = ({ icon: Icon, label, onClick, color }) => {
 const Dashboard = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
+  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const [selectedReport, setSelectedReport] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -226,14 +235,14 @@ const Dashboard = () => {
       const search = reports.filter(
         (report) =>
           report.title.toLowerCase().includes(searchName.toLowerCase()) ||
-          report.content.toLowerCase().includes(searchName.toLowerCase())
+          report.content.toLowerCase().includes(searchName.toLowerCase()),
       );
       setSearchReport(search);
     } else {
       const search = publishedReports.filter(
         (report) =>
           report.title.toLowerCase().includes(searchName.toLowerCase()) ||
-          report.content.toLowerCase().includes(searchName.toLowerCase())
+          report.content.toLowerCase().includes(searchName.toLowerCase()),
       );
       setSearchReport(search);
     }
@@ -323,7 +332,7 @@ const Dashboard = () => {
         totalView: totalView + 1,
       });
       await axios.get(
-        `http://localhost:4000/api/userReport/view-report/${reportId}`
+        `http://localhost:4000/api/userReport/view-report/${reportId}`,
       );
 
       return;
@@ -472,6 +481,12 @@ const Dashboard = () => {
         isOpen={previewModalOpen}
         onClose={() => setPreviewModalOpen(false)}
         canEdit={user.role === "admin"}
+      />
+
+      <FeedbackModal
+        report={selectedReport}
+        isOpen={feedbackModalOpen}
+        onClose={() => setFeedbackModalOpen(false)}
       />
 
       {/* Mobile Overlay */}
@@ -689,6 +704,11 @@ const Dashboard = () => {
                         onPublish={() =>
                           handlePublish(report._id, report.userId)
                         }
+                        onFeedback={() => {
+                          console.log("Feedback clicked");
+                          setSelectedReport(report);
+                          setFeedbackModalOpen(true);
+                        }}
                       />
                     ))}
                   </div>

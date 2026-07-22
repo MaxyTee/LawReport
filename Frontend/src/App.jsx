@@ -25,6 +25,7 @@ import { ProfilePage } from "./Dashboard/Component/ProfilePage";
 import { SettingsPage } from "./Dashboard/Component/SettingPage";
 import { HelpSupportPage } from "./Dashboard/Component/HelpSupportPage";
 import { Layout } from "../root/Layout";
+import About from "./Dashboard/About";
 
 // Protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -78,6 +79,15 @@ function App() {
           }
         />
         <Route
+          path="/About"
+          element={
+            <>
+              <Navbar />
+              <About />
+            </>
+          }
+        />
+        <Route
           path="/login"
           element={
             <RedirectAuthenticatedUser>
@@ -104,8 +114,8 @@ function App() {
             </RedirectAuthenticatedUser>
           }
         />
-      </Route>
-    )
+      </Route>,
+    ),
   );
   return (
     <>

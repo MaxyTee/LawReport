@@ -6,6 +6,7 @@ import { connectDB } from "./db/connectDB.js";
 
 import authRoutes from "./routes/auth.routes.js";
 import reportRoutes from "./routes/report.auth.js";
+import feedbackRoutes from "./routes/feedback.routes.js";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/userReport", reportRoutes);
+app.use("/api/userFeedback", feedbackRoutes);
 
 const startServer = async () => {
   console.log("Connecting to db");

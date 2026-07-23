@@ -92,11 +92,11 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div className={`mobile-menu ${isMenuOpen ? "active" : ""}`}>
         <div className="mobile-menu-content">
-          <NavLink to="#home" className="mobile-nav-link" onClick={toggleMenu}>
+          <NavLink to="/" className="mobile-nav-link" onClick={toggleMenu}>
             Home
           </NavLink>
           <NavLink
-            to="#reports"
+            to="reports"
             className="mobile-nav-link"
             onClick={toggleMenu}
           >
@@ -119,7 +119,7 @@ const Navbar = () => {
           <NavLink to="#news" className="mobile-nav-link" onClick={toggleMenu}>
             News
           </NavLink>
-          <NavLink to="#about" className="mobile-nav-link" onClick={toggleMenu}>
+          <NavLink to="/" className="mobile-nav-link" onClick={toggleMenu}>
             About
           </NavLink>
 

@@ -34,6 +34,13 @@ export const createFeedback = async (req, res) => {
 export const getReportFeedback = async (req, res) => {
   try {
     const { reportId } = req.params;
+    console.log(reportId);
+
+    if (!reportId) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Report Id not found" });
+    }
 
     const feedback = await Feedback.find({ reportId })
       .populate("userId", "name email")

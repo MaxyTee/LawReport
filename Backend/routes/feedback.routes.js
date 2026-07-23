@@ -7,6 +7,6 @@ import {
 const router = express.Router();
 
 router.post("/createFeedback", verifyToken, createFeedback);
-router.post("/getFeedback:reportId", verifyToken, getReportFeedback);
+router.get("/getFeedback:reportId", verifyToken, getReportFeedback);
 
 export default router;

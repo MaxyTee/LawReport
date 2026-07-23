@@ -92,28 +92,36 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div className={`mobile-menu ${isMenuOpen ? "active" : ""}`}>
         <div className="mobile-menu-content">
-          <a href="#home" className="mobile-nav-link" onClick={toggleMenu}>
+          <NavLink to="#home" className="mobile-nav-link" onClick={toggleMenu}>
             Home
-          </a>
-          <a href="#reports" className="mobile-nav-link" onClick={toggleMenu}>
+          </NavLink>
+          <NavLink
+            to="#reports"
+            className="mobile-nav-link"
+            onClick={toggleMenu}
+          >
             Reports
-          </a>
-          <a href="#analysis" className="mobile-nav-link" onClick={toggleMenu}>
+          </NavLink>
+          <NavLink
+            to="#analysis"
+            className="mobile-nav-link"
+            onClick={toggleMenu}
+          >
             Analysis
-          </a>
-          <a
-            href="#case-studies"
+          </NavLink>
+          <NavLink
+            to="#case-studies"
             className="mobile-nav-link"
             onClick={toggleMenu}
           >
             Case Studies
-          </a>
-          <a href="#news" className="mobile-nav-link" onClick={toggleMenu}>
+          </NavLink>
+          <NavLink to="#news" className="mobile-nav-link" onClick={toggleMenu}>
             News
-          </a>
-          <a href="#about" className="mobile-nav-link" onClick={toggleMenu}>
+          </NavLink>
+          <NavLink to="#about" className="mobile-nav-link" onClick={toggleMenu}>
             About
-          </a>
+          </NavLink>
 
           <div className="mobile-auth">
             <button className="mobile-login-btn">

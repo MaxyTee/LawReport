@@ -103,23 +103,23 @@ const Navbar = () => {
             Reports
           </NavLink>
           <NavLink
-            to="#analysis"
+            to="analysis"
             className="mobile-nav-link"
             onClick={toggleMenu}
           >
             Analysis
           </NavLink>
           <NavLink
-            to="#case-studies"
+            to="case-studies"
             className="mobile-nav-link"
             onClick={toggleMenu}
           >
             Case Studies
           </NavLink>
-          <NavLink to="#news" className="mobile-nav-link" onClick={toggleMenu}>
+          <NavLink to="news" className="mobile-nav-link" onClick={toggleMenu}>
             News
           </NavLink>
-          <NavLink to="/" className="mobile-nav-link" onClick={toggleMenu}>
+          <NavLink to="about" className="mobile-nav-link" onClick={toggleMenu}>
             About
           </NavLink>
 
